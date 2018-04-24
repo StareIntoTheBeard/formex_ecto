@@ -32,7 +32,8 @@ defmodule Formex.Ecto.Mixfile do
     ]
 
     if !System.get_env("FORMEX_DEV") do
-      deps ++ [{:formex, ">= 0.6.5 and < 0.7.0"}]
+      deps ++ [{:formex,
+      github: "StareIntoTheBeard/formex"}]
       # deps ++ [{:formex, path: "../formex"}] # for tests with formex debugging
     else
       deps
