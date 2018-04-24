@@ -8,8 +8,7 @@ defmodule Formex.Ecto.Changeset do
 
   @spec create_changeset(form :: Form.t) :: Form.t
   def create_changeset(form) do
-    form.struct
-    |> cast(form.mapped_params, get_fields_to_cast(form))
+    apply(form.struct.__struct__, :changeset, [form.struct, form.mapped_params])
     |> cast_multiple_selects(form)
     |> cast_embedded_forms(form)
     |> form.type.changeset_after_create_callback(form)
@@ -17,8 +16,7 @@ defmodule Formex.Ecto.Changeset do
 
   @spec create_changeset_without_embedded(form :: Form.t) :: Form.t
   def create_changeset_without_embedded(form) do
-    form.struct
-    |> cast(form.mapped_params, get_fields_to_cast(form))
+    apply(form.struct.__struct__, :changeset, [form.struct, form.mapped_params])
     |> cast_multiple_selects(form)
     |> form.type.changeset_after_create_callback(form)
   end
